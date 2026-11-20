@@ -1,0 +1,21 @@
+<div class="mb-10 flex items-end justify-between border-b-4 border-double border-ink pb-2">
+  <h1 class="font-display text-5xl sm:text-6xl">Mis favoritos</h1>
+  <span class="font-mono text-xs text-muted uppercase">
+    {{ favorites.items().length }} guardados
+  </span>
+</div>
+
+@if (favorites.items().length > 0) {
+  <app-media-grid [items]="favorites.items()" />
+} @else {
+  <div class="py-20 text-center">
+    <p class="font-display text-4xl">Aún no has guardado nada.</p>
+    <p class="mt-2 text-muted">Pulsa ♡ en cualquier película o serie para tenerla aquí.</p>
+    <a
+      routerLink="/"
+      class="mt-6 inline-block bg-ink px-6 py-3 font-mono text-sm text-cream uppercase transition-colors hover:bg-accent"
+    >
+      Ver tendencias
+    </a>
+  </div>
+}

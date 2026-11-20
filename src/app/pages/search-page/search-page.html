@@ -1,0 +1,59 @@
+<section class="mb-12">
+  <h1 class="font-display text-5xl sm:text-6xl">Buscar</h1>
+
+  <form
+    (submit)="onSubmit($event, queryInput.value, typeSelect.value)"
+    class="mt-8 flex flex-col gap-4 border-b-2 border-ink pb-3 sm:flex-row sm:items-end"
+  >
+    <input
+      #queryInput
+      type="search"
+      name="q"
+      [value]="query()"
+      placeholder="Título de una película o serie"
+      aria-label="Texto de búsqueda"
+      required
+      class="min-w-0 flex-1 bg-transparent font-display text-3xl placeholder:text-muted/50 focus:outline-none sm:text-4xl"
+    />
+
+    <div class="flex gap-2">
+      <select
+        #typeSelect
+        name="tipo"
+        aria-label="Tipo de contenido"
+        class="flex-1 border border-ink bg-cream px-3 py-2.5 font-mono text-sm uppercase focus:outline-2 focus:outline-accent sm:flex-none"
+      >
+        <option value="pelicula" [selected]="type() === 'pelicula'">Películas</option>
+        <option value="serie" [selected]="type() === 'serie'">Series</option>
+      </select>
+
+      <button
+        type="submit"
+        class="bg-ink px-6 py-2.5 font-mono text-sm text-cream uppercase transition-colors hover:bg-accent"
+      >
+        Buscar
+      </button>
+    </div>
+  </form>
+</section>
+
+@if (loading()) {
+  <app-loader />
+} @else if (error()) {
+  <p class="border border-accent p-4 text-accent">Ha ocurrido un error al buscar. Inténtalo de nuevo.</p>
+} @else if (searched()) {
+  @if (results().length > 0) {
+    <p class="mb-8 font-mono text-xs text-muted uppercase">
+      {{ results().length }} resultados para «<span class="text-ink">{{ query() }}</span>»
+    </p>
+    <app-media-grid [items]="results()" />
+  } @else {
+    <p class="py-20 text-center font-display text-3xl">
+      Nada por aquí para «<em class="text-accent">{{ query() }}</em>».
+    </p>
+  }
+} @else {
+  <p class="py-20 text-center font-display text-3xl text-muted italic">
+    Escribe un título para empezar.
+  </p>
+}

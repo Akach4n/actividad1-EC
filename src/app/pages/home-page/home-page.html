@@ -1,0 +1,33 @@
+<section class="mb-14 grid gap-6 border-b border-ink pb-10 md:grid-cols-[2fr_1fr] md:items-end">
+  <h1 class="font-display text-5xl leading-[0.95] sm:text-7xl">
+    Lo que todo el mundo está viendo <em class="text-accent">hoy</em>.
+  </h1>
+  <p class="max-w-sm text-muted">
+    Una selección diaria de las películas y series más populares, ordenadas por su tendencia en
+    The Movie Database.
+  </p>
+</section>
+
+@if (loading()) {
+  <app-loader />
+} @else if (error()) {
+  <p class="border border-accent p-4 text-accent">
+    No se han podido cargar las tendencias. Comprueba tu conexión o la API Key e inténtalo de nuevo.
+  </p>
+} @else {
+  <section class="mb-16">
+    <div class="mb-6 flex items-end justify-between border-b-4 border-double border-ink pb-2">
+      <h2 class="font-display text-3xl sm:text-4xl"><span class="text-accent">❦</span> Películas en tendencia</h2>
+      <span class="font-mono text-xs text-muted uppercase">Top {{ movies().length }}</span>
+    </div>
+    <app-media-grid [items]="movies()" [ranked]="true" />
+  </section>
+
+  <section>
+    <div class="mb-6 flex items-end justify-between border-b-4 border-double border-ink pb-2">
+      <h2 class="font-display text-3xl sm:text-4xl"><span class="text-accent">❦</span> Series en tendencia</h2>
+      <span class="font-mono text-xs text-muted uppercase">Top {{ tvShows().length }}</span>
+    </div>
+    <app-media-grid [items]="tvShows()" [ranked]="true" />
+  </section>
+}

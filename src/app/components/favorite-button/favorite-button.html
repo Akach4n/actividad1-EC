@@ -1,0 +1,14 @@
+<button
+  type="button"
+  (click)="toggle()"
+  [attr.aria-label]="isFavorite() ? 'Quitar de favoritos' : 'Añadir a favoritos'"
+  [attr.aria-pressed]="isFavorite()"
+  class="flex items-center justify-center gap-2 border-2 font-mono transition-colors {{ colorClasses() }} {{ sizeClasses() }}"
+>
+  <span class="text-base leading-none">{{ isFavorite() ? '♥' : '♡' }}</span>
+  @if (showText()) {
+    <span class="text-sm uppercase">
+      {{ isFavorite() ? 'En favoritos' : 'Añadir a favoritos' }}
+    </span>
+  }
+</button>

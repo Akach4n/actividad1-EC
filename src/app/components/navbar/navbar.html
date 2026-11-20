@@ -1,0 +1,39 @@
+<header class="mx-auto w-full max-w-6xl px-4">
+  <div class="flex justify-between border-b border-dashed border-ink/60 py-2 font-mono text-xs text-muted">
+    <span>{{ today | date: 'dd.MM.yyyy' }}</span>
+    <span class="hidden sm:inline">~ Cartelera de cine y series ~</span>
+  </div>
+
+  <div
+    class="flex flex-col items-center gap-4 border-b-4 border-double border-ink py-6 sm:flex-row sm:items-end sm:justify-between">
+    <a routerLink="/" class="text-center sm:text-left">
+      <span class="block font-logo text-4xl leading-none sm:text-5xl">
+        Películas <span class="text-accent">Manolo</span>
+      </span>
+
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="flex gap-6 font-mono text-sm uppercase">
+        <li>
+          <a routerLink="/" routerLinkActive="text-accent underline decoration-wavy underline-offset-8"
+            [routerLinkActiveOptions]="{ exact: true }" class="hover:text-accent">
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a routerLink="/buscar" routerLinkActive="text-accent underline decoration-wavy underline-offset-8"
+            class="hover:text-accent">
+            Buscar
+          </a>
+        </li>
+        <li>
+          <a routerLink="/favoritos" routerLinkActive="text-accent underline decoration-wavy underline-offset-8"
+            class="hover:text-accent">
+            Favoritos ({{ favorites.items().length }})
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
